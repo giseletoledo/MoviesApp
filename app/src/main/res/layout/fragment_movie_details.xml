@@ -42,6 +42,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/hqTitle" />
 
+    <TextView
+        android:id="@+id/classificationText"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="Avaliação/nota"
+        app:layout_constraintBottom_toTopOf="@+id/carousel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/contentText" />
+
     <org.imaginativeworld.whynotimagecarousel.ImageCarousel
         android:id="@+id/carousel"
         android:layout_width="0dp"
