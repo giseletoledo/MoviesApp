@@ -8,13 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import com.ebac.moviesapp.placeholder.PlaceholderContent
 
-/**
- * A fragment representing a list of Items.
- */
-class MovieFragment : Fragment() {
+class MovieFragment : Fragment(), MovieListener {
 
     private var columnCount = 1
 
@@ -41,7 +39,7 @@ class MovieFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = MyMovieRecyclerViewAdapter(PlaceholderContent.ITEMS)
+                adapter = MyMovieRecyclerViewAdapter(PlaceholderContent.ITEMS, this@MovieFragment)//o this se refere ao recyclerView por causa do with
             }
         }
         return view
@@ -60,5 +58,9 @@ class MovieFragment : Fragment() {
                     putInt(ARG_COLUMN_COUNT, columnCount)
                 }
             }
+    }
+
+    override fun onItemSelected(position: Int) {
+        findNavController().navigate(R.id.movieDetailsFragment)
     }
 }
