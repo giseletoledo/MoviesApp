@@ -4,4 +4,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="poster_do_filme">poster do filme</string>
     <string name="share_button_title">Compartilhar</string>
+    <string name="descricao_detalhe">Detalhes descrição</string>
 </resources>
