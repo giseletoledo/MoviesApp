@@ -13,6 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+        android:layout_margin="16dp">
+
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
@@ -36,6 +38,7 @@
                     app:srcCompat="@drawable/pantera_negra_wakanda_abre_600x400"
                     tools:ignore="ImageContrastCheck" />
 
+
                 <TextView
                     android:id="@+id/item_number"
                     android:layout_width="wrap_content"
@@ -50,6 +53,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+
                 <TextView
                     android:id="@+id/content"
                     android:layout_width="0dp"
@@ -61,6 +65,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
 
 
                 <Button
