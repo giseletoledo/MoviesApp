@@ -6,8 +6,8 @@
 
     <data>
         <variable
-            name="movieDetails"
-            type="com.ebac.moviesapp.MovieDetails" />
+            name="viewModel"
+            type="com.ebac.moviesapp.MovieViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,7 +19,7 @@
             android:id="@+id/hqTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text='@{movieDetails.title}'
+            android:text='@{viewModel.loadMovieDetails().title}'
             android:textColor="#000000"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -43,7 +43,7 @@
             android:id="@+id/contentText"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:text="@{movieDetails.content}"
+            android:text="@{viewModel.loadMovieDetails().content}"
             app:layout_constraintBottom_toTopOf="@id/classificationText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
