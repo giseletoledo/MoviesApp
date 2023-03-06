@@ -27,29 +27,26 @@ class MyMovieRecyclerViewAdapter(
                 false
             )
         )
-
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
-        holder.idView.text = item.id
-        holder.contentView.text = item.content
+        holder.bind(item)
 
         holder.view.setOnClickListener {
             listener.onItemSelected(position)
         }
-
     }
 
     override fun getItemCount(): Int = values.size
 
-    inner class ViewHolder(binding: FragmentItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        val  view: View = binding.root
-        val idView: TextView = binding.itemNumber
-        val contentView: TextView = binding.content
+    inner class ViewHolder(private val binding: FragmentItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        override fun toString(): String {
-            return super.toString() + " '" + contentView.text + "'"
+        val view = binding.root
+
+        fun bind(item: PlaceholderItem){
+            binding.movieItem = item
+            binding.executePendingBindings()
         }
     }
 
