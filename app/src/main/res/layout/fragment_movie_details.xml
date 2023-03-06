@@ -1,67 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".MovieDetailsFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:id="@+id/hqTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text='Titulo'
-        android:textColor="#000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageDetail"
-        app:layout_marginBaseline="10dp" />
+    <data>
+        <variable
+            name="movieDetails"
+            type="com.ebac.moviesapp.MovieDetails" />
+    </data>
 
-    <ImageView
-        android:id="@+id/imageDetail"
-        android:layout_width="0dp"
-        android:layout_height="250dp"
-        android:contentDescription="@string/descricao_detalhe"
-        android:scaleType="centerCrop"
-        android:src="@drawable/pantera_negra_wakanda_abre_600x400"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MovieDetailsFragment">
 
-    <TextView
-        android:id="@+id/contentText"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="Sinopse..."
+        <TextView
+            android:id="@+id/hqTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text='@{movieDetails.title}'
+            android:textColor="#000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageDetail"
+            app:layout_marginBaseline="10dp" />
 
-        app:layout_constraintBottom_toTopOf="@id/classificationText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hqTitle" />
+        <ImageView
+            android:id="@+id/imageDetail"
+            android:layout_width="0dp"
+            android:layout_height="250dp"
+            android:contentDescription="@string/descricao_detalhe"
+            android:scaleType="centerCrop"
+            android:src="@drawable/pantera_negra_wakanda_abre_600x400"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/classificationText"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="Avaliação/nota"
-        app:layout_constraintBottom_toTopOf="@id/carousel"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/contentText"
-        />
+        <TextView
+            android:id="@+id/contentText"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@{movieDetails.content}"
+            app:layout_constraintBottom_toTopOf="@id/classificationText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/hqTitle" />
 
-    <org.imaginativeworld.whynotimagecarousel.ImageCarousel
-        android:id="@+id/carousel"
-        android:layout_width="0dp"
-        android:layout_height="150dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        />
+        <TextView
+            android:id="@+id/classificationText"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="Avaliação/nota"
+            app:layout_constraintBottom_toTopOf="@id/carousel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/contentText" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <org.imaginativeworld.whynotimagecarousel.ImageCarousel
+            android:id="@+id/carousel"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
