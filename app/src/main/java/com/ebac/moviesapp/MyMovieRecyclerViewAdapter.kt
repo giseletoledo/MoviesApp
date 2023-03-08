@@ -14,9 +14,16 @@ interface MovieListener{
 }
 
 class MyMovieRecyclerViewAdapter(
-    private val values: List<PlaceholderItem>,
     private val listener: MovieListener
 ) : RecyclerView.Adapter<MyMovieRecyclerViewAdapter.ViewHolder>() {
+
+    private val values:MutableList<PlaceholderItem> = ArrayList()
+
+    fun updateData(hqList: List<PlaceholderItem>){
+        values.clear()
+        values.addAll(hqList)
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 

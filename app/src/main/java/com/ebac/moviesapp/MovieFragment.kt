@@ -2,65 +2,90 @@ package com.ebac.moviesapp
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
+import android.widget.TextView
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
-import com.ebac.moviesapp.placeholder.PlaceholderContent
+import com.ebac.moviesapp.databinding.FragmentItemListBinding
 
 class MovieFragment : Fragment(), MovieListener {
 
-    private var columnCount = 1
-
+    private lateinit var adapter: MyMovieRecyclerViewAdapter
     private val viewModel by navGraphViewModels<MovieViewModel>(R.id.movie_graph) { defaultViewModelProviderFactory }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        arguments?.let {
-            columnCount = it.getInt(ARG_COLUMN_COUNT)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_item_list, container, false)
+    ): View {
+        val binding = FragmentItemListBinding.inflate(
+            inflater
+        )
+        val view = binding.root
 
-        // Set the adapter
-        if (view is RecyclerView) {
-            with(view) {
-                layoutManager = when {
-                    columnCount <= 1 -> LinearLayoutManager(context)
-                    else -> GridLayoutManager(context, columnCount)
-                }
-                adapter = MyMovieRecyclerViewAdapter(PlaceholderContent.ITEMS, this@MovieFragment)//o this se refere ao recyclerView por causa do with
-            }
+        val layoutManager = LinearLayoutManager(context)
+        adapter = MyMovieRecyclerViewAdapter(this)
+
+        binding.list.apply {
+            this.adapter = this@MovieFragment.adapter
+            this.layoutManager = layoutManager
         }
+
+        initObservers()
+
         return view
     }
 
-    companion object {
+  private fun initObservers(){
+      val progressBar = view?.findViewById<ProgressBar>(R.id.progressBar)
+      val movieList = view?.findViewById<TextView>(R.id.list)
+      val errorTextView = view?.findViewById<TextView>(R.id.errorTextView)
 
-        // TODO: Customize parameter argument names
-        const val ARG_COLUMN_COUNT = "column-count"
+      viewModel.movieListLiveData.observe(viewLifecycleOwner, Observer {
+        adapter.updateData(it)
+      })
 
-        // TODO: Customize parameter initialization
-        @JvmStatic
-        fun newInstance(columnCount: Int) =
-            MovieFragment().apply {
-                arguments = Bundle().apply {
-                    putInt(ARG_COLUMN_COUNT, columnCount)
-                }
-            }
-    }
+      viewModel.dataStateLiveData.observe(viewLifecycleOwner, Observer { state ->
+          progressBar?.let { progressBar ->
+              movieList?.let { movieDetailsTextView ->
+                  errorTextView?.let { errorTextView ->
+                      when (state) {
+                          DataState.LOADING -> {
+                              progressBar.visibility = View.VISIBLE
+                              movieDetailsTextView.visibility = View.GONE
+                              errorTextView.visibility = View.GONE
+                          }
+                          DataState.ERROR -> {
+                              progressBar.visibility = View.GONE
+                              movieDetailsTextView.visibility = View.GONE
+                              errorTextView.visibility = View.VISIBLE
+                              errorTextView.text = "Falha ao carregar a lista"
+                          }
+                          DataState.SUCCESS -> {
+                              progressBar.visibility = View.GONE
+                              movieDetailsTextView.visibility = View.VISIBLE
+                              errorTextView.visibility = View.GONE
+                          }
+                      }
+                  }
+              }
+          }
+      })
+
+
+      viewModel.navigationToDetailLiveData.observe(viewLifecycleOwner, Observer {
+          val action = MovieFragmentDirections.actionMovieFragmentToMovieDetailsFragment()
+          findNavController().navigate(action)
+      })
+  }
 
     override fun onItemSelected(position: Int) {
-        findNavController().navigate(R.id.movieDetailsFragment)
+        viewModel.onMovieSelected(position)
+        //findNavController().navigate(R.id.movieDetailsFragment)
     }
 }

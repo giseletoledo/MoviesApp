@@ -5,4 +5,5 @@
     <string name="poster_do_filme">poster do filme</string>
     <string name="share_button_title">Compartilhar</string>
     <string name="descricao_detalhe">Detalhes descrição</string>
+    <string name="failed_to_load_movie">Falha ao carregar</string>
 </resources>
