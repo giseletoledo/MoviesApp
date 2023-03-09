@@ -46,7 +46,7 @@ class MovieViewModel : ViewModel() {
                 "Wakanda Forever",
                 "Em Pantera Negra: Wakanda Forever da Marvel Studios, a Rainha Ramonda (Angela Bassett), Shuri (Letitia Wright), M’Baku (Winston Duke), Okoye (Danai Gurira) e as Dora Milaje (incluindo Florence Kasumba), lutam para proteger sua nação contra as potências mundiais intervenientes logo após a morte do Rei T’Challa.")
             Handler(Looper.getMainLooper()).postDelayed({
-                _movieListLiveData.postValue(PlaceholderContent.ITEMS)
+                _movieDetailsLiveData.postValue(movieDetails)
                 _dataStateLiveData.postValue(DataState.SUCCESS)
             }, 5000)
             _navigationToDetailLiveData.postValue(Unit)

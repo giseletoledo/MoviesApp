@@ -20,6 +20,7 @@ class MovieFragment : Fragment(), MovieListener {
     private lateinit var movieList: RecyclerView
     private lateinit var errorTextView: TextView
 
+
     private lateinit var adapter: MyMovieRecyclerViewAdapter
     private val viewModel by navGraphViewModels<MovieViewModel>(R.id.movie_graph) { defaultViewModelProviderFactory }
 
@@ -35,6 +36,7 @@ class MovieFragment : Fragment(), MovieListener {
         progressBar = binding.progressBarList
         movieList = binding.list
         errorTextView = binding.errorTextView
+
 
         val layoutManager = LinearLayoutManager(context)
         adapter = MyMovieRecyclerViewAdapter(this)
