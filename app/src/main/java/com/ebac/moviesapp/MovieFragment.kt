@@ -17,8 +17,9 @@ import com.ebac.moviesapp.databinding.FragmentItemListBinding
 class MovieFragment : Fragment(), MovieListener {
 
     private lateinit var progressBar: ProgressBar
-    private lateinit var movieList: TextView
+    private lateinit var movieList: RecyclerView
     private lateinit var errorTextView: TextView
+
     private lateinit var adapter: MyMovieRecyclerViewAdapter
     private val viewModel by navGraphViewModels<MovieViewModel>(R.id.movie_graph) { defaultViewModelProviderFactory }
 
@@ -31,9 +32,9 @@ class MovieFragment : Fragment(), MovieListener {
         )
         val view = binding.root
 
-        val progressBar = binding.progressBar
-        val movieList = binding.list
-        val errorTextView = binding.errorTextView
+        progressBar = binding.progressBar
+        movieList = binding.list
+        errorTextView = binding.errorTextView
 
         val layoutManager = LinearLayoutManager(context)
         adapter = MyMovieRecyclerViewAdapter(this)
