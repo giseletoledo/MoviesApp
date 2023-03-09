@@ -1,5 +1,7 @@
 package com.ebac.moviesapp
 
+import android.os.Handler
+import android.os.Looper
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -26,7 +28,11 @@ class MovieViewModel : ViewModel() {
     private val _dataStateLiveData = MutableLiveData<DataState>()
 
     init {
-        _movieListLiveData.postValue(PlaceholderContent.ITEMS)
+        _dataStateLiveData.postValue(DataState.LOADING)
+        Handler(Looper.getMainLooper()).postDelayed({
+            _movieListLiveData.postValue(PlaceholderContent.ITEMS)
+            _dataStateLiveData.postValue(DataState.SUCCESS)
+        }, 3000)
     }
 
     fun onMovieSelected(position: Int) {
@@ -39,8 +45,10 @@ class MovieViewModel : ViewModel() {
             val movieDetails = MovieDetails(
                 "Wakanda Forever",
                 "Em Pantera Negra: Wakanda Forever da Marvel Studios, a Rainha Ramonda (Angela Bassett), Shuri (Letitia Wright), M’Baku (Winston Duke), Okoye (Danai Gurira) e as Dora Milaje (incluindo Florence Kasumba), lutam para proteger sua nação contra as potências mundiais intervenientes logo após a morte do Rei T’Challa.")
-            _movieDetailsLiveData.postValue(movieDetails)
-            _dataStateLiveData.postValue(DataState.SUCCESS) // atualiza o estado para Success se o filme existir
+            Handler(Looper.getMainLooper()).postDelayed({
+                _movieListLiveData.postValue(PlaceholderContent.ITEMS)
+                _dataStateLiveData.postValue(DataState.SUCCESS)
+            }, 5000)
             _navigationToDetailLiveData.postValue(Unit)
         }
     }

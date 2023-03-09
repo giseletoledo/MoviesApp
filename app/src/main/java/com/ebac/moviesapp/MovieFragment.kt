@@ -32,7 +32,7 @@ class MovieFragment : Fragment(), MovieListener {
         )
         val view = binding.root
 
-        progressBar = binding.progressBar
+        progressBar = binding.progressBarList
         movieList = binding.list
         errorTextView = binding.errorTextView
 
