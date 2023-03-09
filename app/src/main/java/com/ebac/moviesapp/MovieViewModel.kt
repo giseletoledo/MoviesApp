@@ -37,10 +37,10 @@ class MovieViewModel : ViewModel() {
 
     fun onMovieSelected(position: Int) {
 
-        _dataStateLiveData.postValue(DataState.LOADING) // atualiza o estado para Loading
-        val movie = PlaceholderContent.ITEMS.getOrNull(position) // tenta obter o filme com base na posição
+        _dataStateLiveData.postValue(DataState.LOADING)
+        val movie = PlaceholderContent.ITEMS.getOrNull(position)
         if (movie == null) {
-            _dataStateLiveData.postValue(DataState.ERROR) // atualiza o estado para Error se o filme não existir
+            _dataStateLiveData.postValue(DataState.ERROR)
         } else {
             val movieDetails = MovieDetails(
                 "Wakanda Forever",

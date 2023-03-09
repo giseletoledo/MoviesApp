@@ -30,7 +30,6 @@ class MovieDetailsFragment : Fragment() {
             false)
 
         binding.lifecycleOwner = this
-        //binding.movieDetails = viewModel.loadMovieDetails()
         binding.viewModel = viewModel
         return binding.root
     }

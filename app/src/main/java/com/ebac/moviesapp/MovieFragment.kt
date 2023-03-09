@@ -88,6 +88,5 @@ class MovieFragment : Fragment(), MovieListener {
 
     override fun onItemSelected(position: Int) {
         viewModel.onMovieSelected(position)
-        //findNavController().navigate(R.id.movieDetailsFragment)
     }
 }
